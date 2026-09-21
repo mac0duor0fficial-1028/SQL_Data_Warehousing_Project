@@ -135,4 +135,3 @@ For questions or collaboration, reach out to:
 
 ---
 
-> **Built with ❤️ by [Macphalen Oduor](https://github.com/mac0duor0fficial)**
