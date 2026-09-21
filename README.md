@@ -18,10 +18,44 @@ The project follows a **multi-layered data architecture** to ensure scalability,
 
 ```mermaid
 graph LR
-    A[Sources] -->|CSV Files| B[Bronze Layer]
-    B -->|Raw Data| C[Silver Layer]
-    C -->|Transformed Data| D[Gold Layer]
-    D -->|Business-Ready Data| E[Consumers]
+    subgraph Sources["📁 Sources"]
+        A1[CRM]
+        A2[ERP]
+        A3[Other Systems]
+    end
+    
+    subgraph Bronze["🟠 Bronze Layer"]
+        B[Raw Data]
+    end
+    
+    subgraph Silver["⚪ Silver Layer"]
+        C[Transformed Data]
+    end
+    
+    subgraph Gold["🟡 Gold Layer"]
+        D[Business-Ready Data]
+    end
+    
+    subgraph Consumers["📊 Consumers"]
+        E1[BI & Reporting]
+        E2[Ad-Hoc SQL Queries]
+        E3[Machine Learning]
+    end
+    
+    A1 -->|CSV Files| B
+    A2 -->|CSV Files| B
+    A3 -->|CSV Files| B
+    B -->|Batch Processing\nFull Load| C
+    C -->|Data Cleansing\nStandardization\nNormalization| D
+    D -->|Data Integrations\nAggregations\nBusiness Logic| E1
+    D -->|Data Integrations\nAggregations\nBusiness Logic| E2
+    D -->|Data Integrations\nAggregations\nBusiness Logic| E3
+    
+    style Sources fill:#f9f9f9,stroke:#333
+    style Bronze fill:#f9d71c,stroke:#333
+    style Silver fill:#e0e0e0,stroke:#333
+    style Gold fill:#f39c12,stroke:#333
+    style Consumers fill:#f9f9f9,stroke:#333
 ```
 
 ### **Layers**
